@@ -12,36 +12,45 @@ code {
     monospace;
 }
 
-table{
-      width: 60%;
-    text-align: center;
-    margin-bottom: 40px;
+table {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 40px;
 }
 
-thead{
-      background: brown;
-    color: black;
-    font-size: 20px;
-        border-radius: 4px;
+thead {
+  background: brown;
+  color: black;
+  font-size: 20px;
+  border-radius: 4px;
 }
 
-tbody{
-     background: lightgray;
-    color: black;
-    font-size: 18px;
-        border-radius: 4px;
+tbody {
+  background: lightgray;
+  color: black;
+  font-size: 18px;
+  border-radius: 4px;
 }
 
-.wrap-div{
-      display: flex;
-    flex-direction: column;
-    /* height: 100vh; */
-    align-items: center;
-    margin: 0 auto;
-        background: aliceblue;
+.table-div {
+  overflow: hidden;
+  width: 80%;
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
 }
 
-h2{
-      width: 80%;
-      margin-top: 40px;
+.wrap-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  background: aliceblue;
+  height: 100%;
+}
+
+h2 {
+  width: 80%;
+  margin-top: 40px;
+  font-size: 18px;
 }

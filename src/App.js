@@ -13,10 +13,18 @@ class App extends Component {
         { Alcohol: 2, Flavanoids: 5.0 },
         { Alcohol: 3, Flavanoids: 8.0 },
         { Alcohol: 1, Flavanoids: 5.0 },
-        { Alcohol: 2, Flavanoids: 3.0 },
-        { Alcohol: 3, Flavanoids: 5.0 },
-        { Alcohol: 3, Flavanoids: 6.0 },
-        { Alcohol: 1, Flavanoids: 8.0 },
+        { Alcohol: 12, Flavanoids: 3.0 },
+        { Alcohol: 9, Flavanoids: 5.0 },
+        { Alcohol: 5, Flavanoids: 6.0 },
+        { Alcohol: 8, Flavanoids: 8.0 },
+        { Alcohol: 7, Flavanoids: 3.0 },
+        { Alcohol: 6, Flavanoids: 5.0 },
+        { Alcohol: 5, Flavanoids: 6.0 },
+        { Alcohol: 4, Flavanoids: 8.0 },
+        { Alcohol: 10, Flavanoids: 3.0 },
+        { Alcohol: 11, Flavanoids: 5.0 },
+        { Alcohol: 8, Flavanoids: 6.0 },
+        { Alcohol: 9, Flavanoids: 8.0 },
         // Add more data as needed
       ],
       flavanoidsData: [
@@ -31,7 +39,7 @@ class App extends Component {
 
   calculateMean = (data) => {
     const sum = data.reduce((acc, item) => acc + item, 0);
-    return sum / data.length;
+    return Math.round(sum / data.length).toFixed(3);
   };
 
   calculateMedian = (data) => {
@@ -39,9 +47,10 @@ class App extends Component {
     const middle = Math.floor(sortedData.length / 2);
 
     if (sortedData.length % 2 === 0) {
-      return (sortedData[middle - 1] + sortedData[middle]) / 2;
+      let val = (sortedData[middle - 1] + sortedData[middle]) / 2
+      return Math.round(val).toFixed(3);
     } else {
-      return sortedData[middle];
+      return Math.round(sortedData[middle]).toFixed(3);
     }
   };
 
@@ -61,7 +70,7 @@ class App extends Component {
       }
     });
 
-    return mode;
+    return Math.round(mode).toFixed(3);
   }
 
   calculateGamma = (data) => {
@@ -77,7 +86,7 @@ class App extends Component {
     const classes1 = Array.from(new Set(flavanoidsData.map((item) => item.Alcohol)));
 
     const classWiseStats1 = classes1.map((classNum) => {
-  
+
       const classData = gammaData.filter((item) => item.Alcohol === classNum);
       const gammaValues = classData.map((item) => item.Gamma);
 
@@ -108,70 +117,74 @@ class App extends Component {
         <br />
         <h2>Question 1 - Write utility functions to calculate the class-wise mean, median, mode of
           “Flavanoids” for the entire dataset.</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Measure</th>
-              {classes.map((classNum) => (
-                <th key={classNum}>Class {classNum}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Flavanoids Mean</td>
-              {classWiseStats.map((stats) => (
-                <td key={stats.class}>{stats.mean.toFixed(2)}</td>
-              ))}
-            </tr>
-            <tr>
-              <td>Flavanoids Median</td>
-              {classWiseStats.map((stats) => (
-                <td key={stats.class}>{stats.median.toFixed(2)}</td>
-              ))}
-            </tr>
-            <tr>
-              <td>Flavanoids Mode</td>
-              {classWiseStats.map((stats) => (
-                <td key={stats.class}>{stats.mode}</td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
+        <div className='table-div'>
+          <table>
+            <thead>
+              <tr>
+                <th>Measure</th>
+                {classes.map((classNum) => (
+                  <th key={classNum}>Class {classNum}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Flavanoids Mean</td>
+                {classWiseStats.map((stats) => (
+                  <td key={stats.class}>{stats.mean}</td>
+                ))}
+              </tr>
+              <tr>
+                <td>Flavanoids Median</td>
+                {classWiseStats.map((stats) => (
+                  <td key={stats.class}>{stats.median}</td>
+                ))}
+              </tr>
+              <tr>
+                <td>Flavanoids Mode</td>
+                {classWiseStats.map((stats) => (
+                  <td key={stats.class}>{stats.mode}</td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <h2>Question 2 - Write a function that helps you create a new property “Gamma” for each point of
           the dataset. “Gamma” can be calculated as Gamma = (Ash * Hue) / Magnesium.
           Thereafter, calculate the class-wise mean, median, mode of “Gamma” for the
           entire dataset.</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Measure</th>
-              {classes1.map((classNum) => (
-                <th key={classNum}>Class {classNum}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Gamma Mean</td>
-              {classWiseStats1.map((stats) => (
-                <td key={stats.class}>{stats.mean.toFixed(2)}</td>
-              ))}
-            </tr>
-            <tr>
-              <td>Gamma Median</td>
-              {classWiseStats1.map((stats) => (
-                <td key={stats.class}>{stats.median.toFixed(2)}</td>
-              ))}
-            </tr>
-            <tr>
-              <td>Gamma Mode</td>
-              {classWiseStats1.map((stats) => (
-                <td key={stats.class}>{stats.mode}</td>
-              ))}
-            </tr>
-          </tbody>
-        </table>
+        <div className='table-div'>
+          <table>
+            <thead>
+              <tr>
+                <th>Measure</th>
+                {classes1.map((classNum) => (
+                  <th key={classNum}>Class {classNum}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Gamma Mean</td>
+                {classWiseStats1.map((stats) => (
+                  <td key={stats.class}>{stats.mean}</td>
+                ))}
+              </tr>
+              <tr>
+                <td>Gamma Median</td>
+                {classWiseStats1.map((stats) => (
+                  <td key={stats.class}>{stats.median}</td>
+                ))}
+              </tr>
+              <tr>
+                <td>Gamma Mode</td>
+                {classWiseStats1.map((stats) => (
+                  <td key={stats.class}>{stats.mode}</td>
+                ))}
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     );
   };
