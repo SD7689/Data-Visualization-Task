@@ -11,30 +11,30 @@ class App extends Component {
         { Alcohol: 3, Flavanoids: 6.0 },
         { Alcohol: 2, Flavanoids: 5.0 },
         { Alcohol: 2, Flavanoids: 5.0 },
-        { Alcohol: 2, Flavanoids: 5.0 },
-        { Alcohol: 2, Flavanoids: 5.0 },
-        { Alcohol: 2, Flavanoids: 5.0 },
-        { Alcohol: 2, Flavanoids: 5.0 },
-        { Alcohol: 2, Flavanoids: 5.0 },
-        { Alcohol: 2, Flavanoids: 5.0 },
+        { Alcohol: 3, Flavanoids: 8.0 },
+        { Alcohol: 1, Flavanoids: 5.0 },
+        { Alcohol: 2, Flavanoids: 3.0 },
+        { Alcohol: 3, Flavanoids: 5.0 },
+        { Alcohol: 3, Flavanoids: 6.0 },
+        { Alcohol: 1, Flavanoids: 8.0 },
         // Add more data as needed
       ],
       flavanoidsData: [
         { Alcohol: 1, Ash: 2.5, Hue: 1.5, Magnesium: 10 },
         { Alcohol: 2, Ash: 3.0, Hue: 2.0, Magnesium: 15 },
+        { Alcohol: 3, Ash: 3.0, Hue: 4.0, Magnesium: 10 },
+        { Alcohol: 2, Ash: 2.0, Hue: 5.0, Magnesium: 15 },
         // Add more data as needed
       ],
     }
   }
 
   calculateMean = (data) => {
-    debugger;
     const sum = data.reduce((acc, item) => acc + item, 0);
     return sum / data.length;
   };
 
   calculateMedian = (data) => {
-    debugger;
     const sortedData = data.slice().sort((a, b) => a - b);
     const middle = Math.floor(sortedData.length / 2);
 
@@ -46,7 +46,6 @@ class App extends Component {
   };
 
   calculateMode = (data) => {
-    debugger;
     const counts = {};
     data.forEach((item) => {
       counts[item] = (counts[item] || 0) + 1;
@@ -73,13 +72,12 @@ class App extends Component {
   };
 
   render() {
-    debugger;
     const { dataset, flavanoidsData } = this.state;
     const gammaData = this.calculateGamma(flavanoidsData);
     const classes1 = Array.from(new Set(flavanoidsData.map((item) => item.Alcohol)));
 
     const classWiseStats1 = classes1.map((classNum) => {
-      debugger;
+  
       const classData = gammaData.filter((item) => item.Alcohol === classNum);
       const gammaValues = classData.map((item) => item.Gamma);
 
@@ -96,7 +94,6 @@ class App extends Component {
     const classWiseStats = classes.map((classNum) => {
       const classData = dataset.filter((item) => item.Alcohol === classNum);
       const flavanoidsData = classData.map((item) => item.Flavanoids);
-
       return {
         class: classNum,
         mean: this.calculateMean(flavanoidsData),
